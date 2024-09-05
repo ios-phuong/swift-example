@@ -21,7 +21,8 @@ struct ContentView: View {
 //            combineLatest()
 //            zip()
 //            retry()
-            catchOperator()
+//            catchOperator()
+            exampleThrottle()
         }
     }
     
@@ -30,9 +31,11 @@ struct ContentView: View {
         let publisher1 = PassthroughSubject<Int, Never>()
         let publisher2 = PassthroughSubject<String, Never>()
 
-        let cancellable = publisher1
+        let _ = publisher1
             .combineLatest(publisher2)
-            .sink { print("Received \($0) and \($1)") }
+            .sink { value in
+                print("Received \(value.0) and \(value.1)")
+            }
 
         publisher1.send(1)
         publisher2.send("A")
@@ -46,7 +49,7 @@ struct ContentView: View {
         let numbers = [1, 2, 3, 4, 5].publisher
         let string = ["A", "B", "C"].publisher
         
-        let cancellable = Publishers.Zip(numbers, string)
+        let _ = Publishers.Zip(numbers, string)
             .sink {
                 print($0)
             }
@@ -60,25 +63,35 @@ struct ContentView: View {
         let publisher = Fail<Int, Error>(error: URLError(.badServerResponse))
             .tryCatch { error -> Just<Int> in
                 attemptCount += 1
-                if attemptCount >= 3 {
-                    return Just(1)
-                } else {
-                    print("error")
-                    throw error
+                
+                print("\(attemptCount)")
+                
+                if attemptCount == 5 {
+                    return Just(100)
                 }
+                throw error
             }
-            .retry(2)
-            .sink(receiveCompletion: { completion in
-                print(completion)
-            }, receiveValue: { value in
+            .retry(10)
+        
+        let subscriber = AnySubscriber<Int, Error>(
+            receiveSubscription: { subscription in
+                subscription.request(.unlimited)
+            },
+            receiveValue: { value in
                 print(value)
-            })
+                return .unlimited
+            },
+            receiveCompletion: { completion in
+                print(completion)
+            }
+        )
+        publisher.subscribe(subscriber)
     }
 
     func catchOperator() {
         let numbers = [1, 2, 3, 4, 5].publisher
 
-        let cancellable = numbers
+        let _ = numbers
             .tryMap { value -> Int in
                 if value == 3 {
                     throw URLError(.badServerResponse)
@@ -91,6 +104,24 @@ struct ContentView: View {
             .sink { print($0) }
 
         // Output: 1, 2, 0
+    }
+    
+    func exampleThrottle() {
+        let subject = PassthroughSubject<String, Never>()
+
+        let _ = subject
+            .throttle(for: .seconds(2), scheduler: RunLoop.main, latest: true)
+            .sink { print($0) }
+
+        subject.send("Hello")
+        subject.send("World")
+        subject.send("Combine")
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            subject.send("Swift")
+        }
+        
+        RunLoop.main.run(until: Date().addingTimeInterval(5))
     }
 }
 
