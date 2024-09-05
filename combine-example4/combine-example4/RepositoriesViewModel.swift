@@ -25,9 +25,8 @@ class RepositoriesViewModel: ObservableObject {
             URL(string: "https://api.github.com/orgs/facebook/repos")!
         ]
         let publishers = urls.map({ fetchRepositories(from: $0) })
-        let publisherArr = urls.map(fetchRepositories(from:))
         
-        Publishers.MergeMany(publisherArr)
+        Publishers.MergeMany(publishers)
             .collect() // Collect all arrays of repositories into a single array
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
@@ -48,14 +47,6 @@ class RepositoriesViewModel: ObservableObject {
     func fetchRepositories(from url: URL) -> AnyPublisher<[Repository], Error> {
         URLSession.shared.dataTaskPublisher(for: url)
             .map { $0.data }
-//            .tryMap({ (data: Data, response: URLResponse) in
-//                if let json = try? JSONSerialization.jsonObject(with: data, options: []) {
-//                    print("JSON Response from \(url): \(json)")
-//                } else {
-//                    print("data invalid")
-//                }
-//                return data
-//            })
             .decode(type: [Repository].self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
