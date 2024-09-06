@@ -22,7 +22,6 @@ struct ContentView: View {
 //            zip()
 //            retry()
 //            catchOperator()
-            exampleThrottle()
         }
     }
     
@@ -104,24 +103,6 @@ struct ContentView: View {
             .sink { print($0) }
 
         // Output: 1, 2, 0
-    }
-    
-    func exampleThrottle() {
-        let subject = PassthroughSubject<String, Never>()
-
-        let _ = subject
-            .throttle(for: .seconds(2), scheduler: RunLoop.main, latest: true)
-            .sink { print($0) }
-
-        subject.send("Hello")
-        subject.send("World")
-        subject.send("Combine")
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            subject.send("Swift")
-        }
-        
-        RunLoop.main.run(until: Date().addingTimeInterval(5))
     }
 }
 
