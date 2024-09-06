@@ -18,11 +18,22 @@ struct ContentView: View {
         }
         .padding()
         .onAppear() {
+            flatMap()
 //            combineLatest()
 //            zip()
 //            retry()
 //            catchOperator()
         }
+    }
+    
+    func flatMap() {
+        let values = [1, 2, 3].publisher
+        let _ = values
+            .flatMap { value in
+                return Just(value * 2)
+            }
+            .sink { print($0) }
+        // Output: 2, 4, 6
     }
     
     //Combines the latest values of two or more publishers whenever any of them emit a new value.

@@ -16,29 +16,20 @@ struct Repository: Decodable, Identifiable {
 class ContentViewModel: ObservableObject {
     
     @Published var repositories: [Repository] = []
-
-    let userIDs = [
-        "apple", 
-        "google",
-        "facebook"
-    ].publisher
+    
     var cancellable = Set<AnyCancellable>()
     
-    func fetchRepositories(from name: String) -> AnyPublisher<[Repository], Error> {
-        let url = URL(string: "https://api.github.com/orgs/\(name)/repos")!
-        return URLSession.shared.dataTaskPublisher(for: url)
-            .map { $0.data }
-            .decode(type: [Repository].self, decoder: JSONDecoder())
+    func fetchUserIDs() -> AnyPublisher<[String], Never> {
+        Just(["apple", "google", "facebook"])
             .eraseToAnyPublisher()
     }
     
     func fetch() {
-        userIDs
-            .receive(on: DispatchQueue.main)
-            .flatMap { name in
-                self.fetchRepositories(from: name)
-                    .receive(on: DispatchQueue.main)
+        fetchUserIDs()
+            .flatMap { userIDs in
+                Publishers.MergeMany(userIDs.map { self.fetchRepositories(from: $0) })
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
@@ -50,5 +41,13 @@ class ContentViewModel: ObservableObject {
                 self.repositories.append(contentsOf: repos)
             })
             .store(in: &cancellable)
+    }
+    
+    func fetchRepositories(from name: String) -> AnyPublisher<[Repository], Error> {
+        let url = URL(string: "https://api.github.com/orgs/\(name)/repos")!
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map { $0.data }
+            .decode(type: [Repository].self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
     }
 }
