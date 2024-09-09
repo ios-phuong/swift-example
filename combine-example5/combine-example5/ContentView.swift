@@ -9,6 +9,9 @@ import SwiftUI
 import Combine
 
 struct ContentView: View {
+    
+    @StateObject var viewModel = ContentViewModel()
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -18,11 +21,14 @@ struct ContentView: View {
         }
         .padding()
         .onAppear() {
-            flatMap()
+//            flatMap()
 //            combineLatest()
 //            zip()
 //            retry()
 //            catchOperator()
+//            viewModel.throttle()
+//            viewModel.delay()
+            viewModel.timeout()
         }
     }
     

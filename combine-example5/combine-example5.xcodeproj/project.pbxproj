@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		817D918E2C8E95400031D5D9 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D918D2C8E95400031D5D9 /* ContentViewModel.swift */; };
 		81B26A472C899404003F6AB3 /* combine_example5App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B26A462C899404003F6AB3 /* combine_example5App.swift */; };
 		81B26A492C899404003F6AB3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B26A482C899404003F6AB3 /* ContentView.swift */; };
 		81B26A4B2C899406003F6AB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81B26A4A2C899406003F6AB3 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		817D918D2C8E95400031D5D9 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		81B26A432C899404003F6AB3 /* combine-example5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "combine-example5.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81B26A462C899404003F6AB3 /* combine_example5App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = combine_example5App.swift; sourceTree = "<group>"; };
 		81B26A482C899404003F6AB3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			children = (
 				81B26A462C899404003F6AB3 /* combine_example5App.swift */,
 				81B26A482C899404003F6AB3 /* ContentView.swift */,
+				817D918D2C8E95400031D5D9 /* ContentViewModel.swift */,
 				81B26A4A2C899406003F6AB3 /* Assets.xcassets */,
 				81B26A4C2C899406003F6AB3 /* combine_example5.entitlements */,
 				81B26A4D2C899406003F6AB3 /* Preview Content */,
@@ -141,6 +144,7 @@
 			files = (
 				81B26A492C899404003F6AB3 /* ContentView.swift in Sources */,
 				81B26A472C899404003F6AB3 /* combine_example5App.swift in Sources */,
+				817D918E2C8E95400031D5D9 /* ContentViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
