@@ -7,17 +7,13 @@
 
 import Foundation
 
-protocol MovieDetailViewInteractorProtocol: AnyObject {
+protocol MovieDetailViewInteractorProtocol: AnyObject {}
+
+protocol MovieDetailViewInteractorOutputProtocol: AnyObject {}
+
+
+class MovieDetailViewInteractor {
+    var presenter: MovieDetailViewInteractorOutputProtocol?
 }
 
-
-protocol MovieDetailViewInteractorOutputProtocol: AnyObject {
-}
-
-
-final class MovieDetailViewInteractor {
-    var output: MovieDetailViewInteractorOutputProtocol?
-}
-
-extension MovieDetailViewInteractor : MovieDetailViewInteractorProtocol {
-}
+extension MovieDetailViewInteractor : MovieDetailViewInteractorProtocol {}

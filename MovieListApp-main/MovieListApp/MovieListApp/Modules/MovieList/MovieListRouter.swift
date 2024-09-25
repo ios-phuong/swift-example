@@ -13,32 +13,28 @@ protocol MovieListRouterProtocol: AnyObject {
 }
 
 enum MovieListRoutes {
-    case detail(movie: MovieList)
+    case detail(movie: Movie)
 }
 
-
-final class MovieListRouter {
+class MovieListRouter {
     
-    //MARK: - Properties
     weak var viewController: MovieListViewController?
     
-    static func createModule(movieListVCRef: MovieListViewController){
+    static func createModule(movieListVC: MovieListViewController) {
         let interactor = ListInteractor()
         let router = MovieListRouter()
-        let presenter = MovieListPresenter(view: movieListVCRef, router: router, interactor: interactor)
-        movieListVCRef.presenter = presenter
-        interactor.output = presenter
-        router.viewController = movieListVCRef
+        let presenter = MovieListPresenter(viewController: movieListVC, router: router, interactor: interactor)
+        movieListVC.presenter = presenter
+        interactor.presenter = presenter
+        router.viewController = movieListVC
     }
 }
 
-//MARK: - Extension +  MovieListRouterProtocol
 extension MovieListRouter : MovieListRouterProtocol {
     func navigate(_ route: MovieListRoutes) {
         switch route {
         case .detail(let movieObj):
             let detailVC = MovieDetailsViewRouter.createModule(movie: movieObj)
-            
             viewController?.navigationController?.pushViewController(detailVC, animated: true)
         }
     }

@@ -9,40 +9,27 @@ import UIKit
 
 protocol MovieListViewControllerProtocol: AnyObject {
     func reloadData()
-    func showLoadingView()
-    func hideLoadingView()
     func setupTableView()
-    func setUpView()
 }
 
 final class MovieListViewController: UIViewController {
     
-    //MARK: - Properties
-    var presenter: MovieListPresenterProtocol!
     @IBOutlet private weak var tableView: UITableView!
+    
+    var presenter: MovieListPresenterProtocol!
 
-    //MARK: - Lifecylce
     override func viewDidLoad() {
         super.viewDidLoad()
-        MovieListRouter.createModule(movieListVCRef: self)
-        presenter.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveReloadNotification(notification:)), name:  Notification.Name("RELOAD_NOTIFICATION"), object: nil)
-        // Do any additional setup after loading the view.
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        presenter.viewWillAppear()
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode =  .always
-    }
         
-    override func viewWillDisappear(_ animated: Bool) {
-        //navigationController?.navigationBar.prefersLargeTitles = false
+        MovieListRouter.createModule(movieListVC: self)
+        presenter.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveReloadNotification(notification:)), name:  Notification.Name("RELOAD_NOTIFICATION"), object: nil)
     }
     
-    //MARK: - Functions + IBActions
     @objc func didReceiveReloadNotification(notification: NSNotification) {
-        if let dict = notification.object as? [String : Any], let movie = dict["movie"] as? MovieList {
+        if let dict = notification.object as? [String : Any], let movie = dict["movie"] as? Movie {
             self.presenter?.refreshData(movieObj: movie)
         }
     }
@@ -50,22 +37,11 @@ final class MovieListViewController: UIViewController {
     @IBAction private func onSortButtonTapped(_ sender: UIBarButtonItem) {
         presenter.showActionSheet()
     }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
 }
 
-//MARK: - Extension +  MovieListViewControllerProtocol
 extension MovieListViewController : MovieListViewControllerProtocol {
     func reloadData() {
-        tableView.reloadSections(IndexSet.init(arrayLiteral: 0), with: .fade)
-    }
-    
-    func showLoadingView() {
-    }
-    
-    func hideLoadingView() {
+        tableView.reloadData()
     }
     
     func setupTableView() {
@@ -73,13 +49,8 @@ extension MovieListViewController : MovieListViewControllerProtocol {
         tableView.dataSource = self
         tableView.register(cellType: MovieListTableCell.self)
     }
-    
-    func setUpView() {
-        setAccessibilityIdentifiers()
-    }
 }
 
-// MARK: - TabeView (List)
 extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         presenter.numberOfRowsInSection()
@@ -89,7 +60,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(with: MovieListTableCell.self, for: indexPath)
         cell.selectionStyle = .none
         if let movie = presenter.movie(indexPath.row) {
-            cell.cellPresenter = MovieListCellPresenter(view: cell, movie: movie)
+            cell.configureCell(movie: movie)
         }
         return cell
     }
@@ -100,12 +71,5 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.didSelectRowAt(index: indexPath.row)
-    }
-}
-
-//MARK: - Extension +  SettingAccessibilityIdentifiers
-extension MovieListViewController {
-    func setAccessibilityIdentifiers() {
-        tableView.accessibilityIdentifier = "listTableView"
     }
 }

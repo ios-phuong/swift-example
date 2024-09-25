@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-//MARK: - Protocol +  MovieDetailsHeaderPresenterProtocol
 protocol MovieDetailsHeaderPresenterProtocol: AnyObject {
     func load()
     func addWatchListButtonTapped()
@@ -16,7 +15,6 @@ protocol MovieDetailsHeaderPresenterProtocol: AnyObject {
 
 }
 
-//MARK: - Protocol +  MovieDetailsHeaderPresenter
 extension MovieDetailsHeaderPresenter {
     fileprivate enum Constants {
         static let addWatchList: String = "ADD TO WATCHLIST"
@@ -28,9 +26,9 @@ extension MovieDetailsHeaderPresenter {
 final class MovieDetailsHeaderPresenter {
     
     weak var view: MovieDetailsHeaderViewProtocol?
-    private let movie: MovieList
+    private let movie: Movie
     
-    init(view: MovieDetailsHeaderViewProtocol?, movie: MovieList) {
+    init(view: MovieDetailsHeaderViewProtocol?, movie: Movie) {
         self.view = view
         self.movie = movie
     }
@@ -66,6 +64,5 @@ extension MovieDetailsHeaderPresenter : MovieDetailsHeaderPresenterProtocol {
         view?.setWatchListButton(movie.watchListAdded == true ? Constants.removeWatchList : Constants.addWatchList)
         view?.setDescription(movie.description)
         view?.setGenreNDurationLabel(movie.genre, releaseDate: movie.duration)
-        view?.setAccessibilityIdentifiers()
     }
 }

@@ -30,7 +30,6 @@
 		005C579C2916580300979410 /* JSONDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005C579B2916580300979410 /* JSONDataFetch.swift */; };
 		005C579E29165B5C00979410 /* JSONManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005C579D29165B5C00979410 /* JSONManager.swift */; };
 		005C57A12916601500979410 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005C57A02916601500979410 /* Extensions.swift */; };
-		005C57A32916650800979410 /* MovieListCellPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005C57A22916650800979410 /* MovieListCellPresenterProtocol.swift */; };
 		009EAC82291A7A510083AD54 /* MovieDetailsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EAC81291A7A510083AD54 /* MovieDetailsAppTests.swift */; };
 		00CA86EF291A2FFC00768BA0 /* MovieDetailsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00CA86EE291A2FFC00768BA0 /* MovieDetailsHeaderView.xib */; };
 		00CA86F1291A301F00768BA0 /* MovieDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CA86F0291A301F00768BA0 /* MovieDetailsHeaderView.swift */; };
@@ -83,7 +82,6 @@
 		005C579B2916580300979410 /* JSONDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDataFetch.swift; sourceTree = "<group>"; };
 		005C579D29165B5C00979410 /* JSONManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONManager.swift; sourceTree = "<group>"; };
 		005C57A02916601500979410 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		005C57A22916650800979410 /* MovieListCellPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCellPresenterProtocol.swift; sourceTree = "<group>"; };
 		009EAC81291A7A510083AD54 /* MovieDetailsAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsAppTests.swift; sourceTree = "<group>"; };
 		00CA86EE291A2FFC00768BA0 /* MovieDetailsHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieDetailsHeaderView.xib; sourceTree = "<group>"; };
 		00CA86F0291A301F00768BA0 /* MovieDetailsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsHeaderView.swift; sourceTree = "<group>"; };
@@ -210,10 +208,10 @@
 			children = (
 				005812052915264F00E19849 /* Entity */,
 				005811E52915035000E19849 /* View */,
-				005811DD291502D900E19849 /* MovieListPresenter.swift */,
-				005811DF291502E400E19849 /* MovieListRouter.swift */,
-				005811E1291502F300E19849 /* MovieListInteractor.swift */,
 				005811E32915030C00E19849 /* MovieListViewController.swift */,
+				005811DD291502D900E19849 /* MovieListPresenter.swift */,
+				005811E1291502F300E19849 /* MovieListInteractor.swift */,
+				005811DF291502E400E19849 /* MovieListRouter.swift */,
 			);
 			path = MovieList;
 			sourceTree = "<group>";
@@ -243,7 +241,6 @@
 			children = (
 				005811E9291503EF00E19849 /* MovieListTableCell.swift */,
 				005811EA291503EF00E19849 /* MovieListTableCell.xib */,
-				005C57A22916650800979410 /* MovieListCellPresenterProtocol.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -363,7 +360,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					001964CB2914F7400071535F = {
 						CreatedOnToolsVersion = 13.0;
@@ -445,7 +442,6 @@
 				005C579E29165B5C00979410 /* JSONManager.swift in Sources */,
 				00581207291527A200E19849 /* MovieListResponse.swift in Sources */,
 				005811EE2915053C00E19849 /* MovieDetailsPresenter.swift in Sources */,
-				005C57A32916650800979410 /* MovieListCellPresenterProtocol.swift in Sources */,
 				005811EB291503EF00E19849 /* MovieListTableCell.swift in Sources */,
 				005811DE291502D900E19849 /* MovieListPresenter.swift in Sources */,
 				00CA86F1291A301F00768BA0 /* MovieDetailsHeaderView.swift in Sources */,
@@ -545,6 +541,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -606,6 +603,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -631,21 +629,25 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5TCHALZ3C5;
+				DEVELOPMENT_TEAM = RC9B9M5SNE;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MovieListApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = JS.MovieListApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.phuong.movielist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -659,21 +661,25 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5TCHALZ3C5;
+				DEVELOPMENT_TEAM = RC9B9M5SNE;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MovieListApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = JS.MovieListApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.phuong.movielist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -683,7 +689,6 @@
 		001964FA2914F7420071535F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -698,6 +703,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = JS.MovieListAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -708,7 +717,6 @@
 		001964FB2914F7420071535F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -723,6 +731,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = JS.MovieListAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -733,7 +745,6 @@
 		001964FD2914F7420071535F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5TCHALZ3C5;
@@ -746,6 +757,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = JS.MovieListAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -756,7 +771,6 @@
 		001964FE2914F7420071535F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5TCHALZ3C5;
@@ -769,6 +783,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = JS.MovieListAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

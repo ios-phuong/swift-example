@@ -6,19 +6,18 @@
 //
 
 import Foundation
-//MARK: - Protocols +  MovieDetailsViewPresenterProtocol
+
 protocol MovieDetailsViewPresenterProtocol: AnyObject {
     func viewDidLoad()
-    func viewWillAppear()
-    var movieDetail : MovieList? { get set }
+    var movieDetail : Movie? { get set }
 }
 
 final class MovieDetailPresenter: MovieDetailsViewPresenterProtocol {
 
-    unowned var view: MovieDetailsViewControllerProtocol?
-    let router: MovieDetailRouterProtocol!
-    let interactor: MovieDetailViewInteractorProtocol!
-    var movieDetail: MovieList?
+    unowned var view: MovieDetailsViewControllerProtocol
+    let router: MovieDetailRouterProtocol
+    let interactor: MovieDetailViewInteractorProtocol
+    var movieDetail: Movie?
 
     init(
         view: MovieDetailsViewControllerProtocol,
@@ -31,15 +30,8 @@ final class MovieDetailPresenter: MovieDetailsViewPresenterProtocol {
     }
     
     func viewDidLoad() {
-        view?.setupTableView()
-    }
-    
-    func viewWillAppear() {
-        view?.setUpView()
+        view.setupTableView()
     }
 }
 
-//MARK: - Extension +  MovieDetailViewInteractorOutputProtocol
-extension MovieDetailPresenter : MovieDetailViewInteractorOutputProtocol {
-    
-}
+extension MovieDetailPresenter: MovieDetailViewInteractorOutputProtocol {}
