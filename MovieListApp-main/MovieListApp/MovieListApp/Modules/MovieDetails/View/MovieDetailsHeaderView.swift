@@ -13,7 +13,6 @@ protocol MovieDetailsHeaderViewProtocol: AnyObject {
     func setWatchListButton(_ title: String)
     func setDescription(_ description : String)
     func setGenreNDurationLabel(_ genre: String, releaseDate : String)
-    func setAccessibilityIdentifiers()
 }
 
 class MovieDetailsHeaderView: UITableViewHeaderFooterView {
@@ -91,18 +90,3 @@ extension MovieDetailsHeaderView : MovieDetailsHeaderViewProtocol {
         durationLabel.text = releaseDate
     }
 }
-//MARK: - Extension +  setAccessibilityIdentifiers
-extension MovieDetailsHeaderView {
-    func setAccessibilityIdentifiers() {
-        movieImage.accessibilityIdentifier = "headerViewMovieImage"
-        titleLabel.accessibilityIdentifier = "headerViewTitleLabel"
-        ratingLabel.accessibilityIdentifier = "headerViewRatingLabel"
-        buttonWatchList.accessibilityIdentifier = "buttonWatchList"
-        buttonWatchTrailer.accessibilityIdentifier = "buttonWatchTrailer"
-        descriptionLabel.accessibilityIdentifier = "headerViewDescriptionLabel"
-        genreLabel.accessibilityIdentifier = "headerViewGenreLabel"
-        durationLabel.accessibilityIdentifier = "headerViewDurationLabel"
-    }
-}
-
-

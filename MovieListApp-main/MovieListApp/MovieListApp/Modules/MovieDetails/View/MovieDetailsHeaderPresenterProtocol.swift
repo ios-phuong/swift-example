@@ -66,6 +66,5 @@ extension MovieDetailsHeaderPresenter : MovieDetailsHeaderPresenterProtocol {
         view?.setWatchListButton(movie.watchListAdded == true ? Constants.removeWatchList : Constants.addWatchList)
         view?.setDescription(movie.description)
         view?.setGenreNDurationLabel(movie.genre, releaseDate: movie.duration)
-        view?.setAccessibilityIdentifiers()
     }
 }

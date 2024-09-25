@@ -32,6 +32,5 @@ extension MovieListCellPresenter : MovieListCellPresenterProtocol {
         }
         view?.setDurationNGenreLabel("\(movie.duration) -  \(movie.genre)")
         view?.setWatchListButton(movie.watchListAdded ?? false)
-        view?.setAccessibilityIdentifiers()
     }
 }

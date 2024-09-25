@@ -13,7 +13,6 @@ protocol MovieListCellProtocol: AnyObject {
     func setWatchListButton(_ isWatchListAdded: Bool)
     func setDurationNGenreLabel(_ text: String)
     func setTitleLabel(_ text: String)
-    func setAccessibilityIdentifiers()
 }
 
 final class MovieListTableCell: UITableViewCell {
@@ -57,14 +56,5 @@ extension MovieListTableCell : MovieListCellProtocol {
     
     func setDurationNGenreLabel(_ text: String) {
         timeNGenreLabel.text = text
-    }
-}
-
-extension MovieListTableCell {
-    func setAccessibilityIdentifiers() {
-        movieImage.accessibilityIdentifier = "listCellMovieImage"
-        titleLabel.accessibilityIdentifier = "titleLabel"
-        timeNGenreLabel.accessibilityIdentifier = "timeNGenreLabel"
-        onMyWatchList.accessibilityIdentifier = "onMyWatchList"
     }
 }

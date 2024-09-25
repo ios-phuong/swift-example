@@ -10,7 +10,6 @@ import Foundation
 
 protocol MovieListPresenterProtocol: AnyObject {
     func viewDidLoad()
-    func viewWillAppear()
     func refreshData(movieObj : MovieList)
     func numberOfRowsInSection() -> Int
     func showActionSheet()
@@ -43,10 +42,6 @@ final class MovieListPresenter : MovieListPresenterProtocol {
         fetchMovies()
     }
     
-    func viewWillAppear() {
-        view?.setUpView()
-    }
-    
     func refreshData(movieObj : MovieList) {
         if let indexObj = self.movies.firstIndex(where: {$0.id == movieObj.id}) {
             movies[indexObj] = movieObj
@@ -68,7 +63,6 @@ final class MovieListPresenter : MovieListPresenterProtocol {
     }
     
     func fetchMovies() {
-        view?.showLoadingView()
         interactor.fetchMoviesList()
     }
     
@@ -92,7 +86,6 @@ extension MovieListPresenter : MovieListInteractorOutputProtocol {
     }
     
     func handleMoviesListResponse(result: MovieListResult) {
-        view?.hideLoadingView()
         switch result {
         case .success(let movieResponse) :
             if let movies = movieResponse.movieList {
