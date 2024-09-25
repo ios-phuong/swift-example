@@ -8,13 +8,13 @@ import Foundation
 
 protocol MovieListInteractorProtocol: AnyObject {
     func fetchMoviesList()
-    func sortMoviesList(sortType : SortType, movies :  [MovieList])
+    func sortMoviesList(sortType : SortType, movies :  [Movie])
 
 }
 
 protocol MovieListInteractorOutputProtocol: AnyObject {
     func handleMoviesListResponse(result: MovieListResult)
-    func handleSortedMoviesList(result: [MovieList]?)
+    func handleSortedMoviesList(result: [Movie]?)
 }
 
 class ListInteractor {
@@ -26,7 +26,7 @@ class ListInteractor {
 }
 
 extension ListInteractor: MovieListInteractorProtocol {
-    func sortMoviesList(sortType : SortType, movies :  [MovieList]) {
+    func sortMoviesList(sortType : SortType, movies :  [Movie]) {
         switch sortType {
         case .title :
             self.presenter?.handleSortedMoviesList(result: (movies.sorted(\.title)))

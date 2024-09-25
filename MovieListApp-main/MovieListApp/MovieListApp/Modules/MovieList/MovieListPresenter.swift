@@ -10,21 +10,19 @@ import Foundation
 
 protocol MovieListPresenterProtocol: AnyObject {
     func viewDidLoad()
-    func refreshData(movieObj : MovieList)
+    func refreshData(movieObj : Movie)
     func numberOfRowsInSection() -> Int
     func showActionSheet()
-    func movie(_ index: Int) -> MovieList?
+    func movie(_ index: Int) -> Movie?
     func didSelectRowAt(index: Int)
 }
 
-
 final class MovieListPresenter : MovieListPresenterProtocol {
     
-    //MARK: - Properties
     unowned var view: MovieListViewControllerProtocol?
     let router: MovieListRouterProtocol!
     let interactor: MovieListInteractorProtocol!
-    private var movies: [MovieList] = []
+    private var movies: [Movie] = []
     
     init(
         view: MovieListViewControllerProtocol,
@@ -42,7 +40,7 @@ final class MovieListPresenter : MovieListPresenterProtocol {
         fetchMovies()
     }
     
-    func refreshData(movieObj : MovieList) {
+    func refreshData(movieObj : Movie) {
         if let indexObj = self.movies.firstIndex(where: {$0.id == movieObj.id}) {
             movies[indexObj] = movieObj
         }
@@ -53,7 +51,7 @@ final class MovieListPresenter : MovieListPresenterProtocol {
         return movies.count
     }
     
-    func movie(_ index: Int) -> MovieList? {
+    func movie(_ index: Int) -> Movie? {
         return movies[safe : index]
     }
     
@@ -76,12 +74,11 @@ final class MovieListPresenter : MovieListPresenterProtocol {
 }
 
 extension MovieListPresenter : MovieListInteractorOutputProtocol {
-    func handleSortedMoviesList(result: [MovieList]?) {
+    func handleSortedMoviesList(result: [Movie]?) {
         guard let sortedMovies = result else {
             return
         }
         self.movies = sortedMovies
-        print(self.movies)
         view?.reloadData()
     }
     

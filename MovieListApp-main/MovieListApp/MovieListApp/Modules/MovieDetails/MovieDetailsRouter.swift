@@ -13,31 +13,28 @@ protocol MovieDetailRouterProtocol: AnyObject {
 }
 
 enum MovieDetailRoutes {
-    case detail(movieObj: MovieList)
+    case detail(movieObj: Movie)
     case openURL(playUrl: URL)
 }
 
-final class MovieDetailsViewRouter {
+class MovieDetailsViewRouter {
 
-    //MARK: - Properties
     weak var viewController: MovieDetailsViewController?
     
-    static func createModule(movie : MovieList) -> MovieDetailsViewController {
+    static func createModule(movie : Movie) -> MovieDetailsViewController {
         let viewController = UIStoryboard.init(name: StoryBoard.Main.rawValue, bundle: .main).instantiateViewController(withIdentifier: "MovieDetailsViewController") as! MovieDetailsViewController
         let interactor = MovieDetailViewInteractor()
         let router = MovieDetailsViewRouter()
         let presenter = MovieDetailPresenter(view: viewController, router: router, interactor: interactor)
         viewController.presenter = presenter
         viewController.presenter.movieDetail = movie
-        interactor.output = presenter
+        interactor.presenter = presenter
         router.viewController = viewController
         return viewController
     }
 }
 
-//MARK: - Extension +  MovieDetailRouterProtocol
 extension MovieDetailsViewRouter: MovieDetailRouterProtocol {
-    
     func navigate(_ route: MovieDetailRoutes) {
         switch route {
         case .detail(let movieObj):

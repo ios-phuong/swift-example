@@ -13,7 +13,7 @@ protocol MovieListRouterProtocol: AnyObject {
 }
 
 enum MovieListRoutes {
-    case detail(movie: MovieList)
+    case detail(movie: Movie)
 }
 
 class MovieListRouter {

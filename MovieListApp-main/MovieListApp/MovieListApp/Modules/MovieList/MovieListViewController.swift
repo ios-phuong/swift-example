@@ -28,7 +28,7 @@ final class MovieListViewController: UIViewController {
     }
     
     @objc func didReceiveReloadNotification(notification: NSNotification) {
-        if let dict = notification.object as? [String : Any], let movie = dict["movie"] as? MovieList {
+        if let dict = notification.object as? [String : Any], let movie = dict["movie"] as? Movie {
             self.presenter?.refreshData(movieObj: movie)
         }
     }
@@ -40,7 +40,7 @@ final class MovieListViewController: UIViewController {
 
 extension MovieListViewController : MovieListViewControllerProtocol {
     func reloadData() {
-        tableView.reloadSections(IndexSet.init(arrayLiteral: 0), with: .fade)
+        tableView.reloadData()
     }
     
     func setupTableView() {
@@ -59,7 +59,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(with: MovieListTableCell.self, for: indexPath)
         cell.selectionStyle = .none
         if let movie = presenter.movie(indexPath.row) {
-            cell.cellPresenter = MovieListCellPresenter(view: cell, movie: movie)
+            cell.configureCell(movie: movie)
         }
         return cell
     }
