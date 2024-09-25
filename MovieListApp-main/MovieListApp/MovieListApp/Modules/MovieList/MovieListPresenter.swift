@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 protocol MovieListPresenterProtocol: AnyObject {
     func viewDidLoad()
     func refreshData(movieObj : Movie)
@@ -17,26 +16,25 @@ protocol MovieListPresenterProtocol: AnyObject {
     func didSelectRowAt(index: Int)
 }
 
-final class MovieListPresenter : MovieListPresenterProtocol {
+class MovieListPresenter : MovieListPresenterProtocol {
     
-    unowned var view: MovieListViewControllerProtocol?
-    let router: MovieListRouterProtocol!
-    let interactor: MovieListInteractorProtocol!
+    weak var viewController: MovieListViewControllerProtocol?
+    let router: MovieListRouterProtocol
+    let interactor: MovieListInteractorProtocol
     private var movies: [Movie] = []
     
     init(
-        view: MovieListViewControllerProtocol,
+        viewController: MovieListViewControllerProtocol,
         router: MovieListRouterProtocol,
         interactor: MovieListInteractorProtocol
     ) {
-        self.view = view
+        self.viewController = viewController
         self.router = router
         self.interactor = interactor
     }
     
-    
     func viewDidLoad() {
-        view?.setupTableView()
+        viewController?.setupTableView()
         fetchMovies()
     }
     
@@ -44,7 +42,7 @@ final class MovieListPresenter : MovieListPresenterProtocol {
         if let indexObj = self.movies.firstIndex(where: {$0.id == movieObj.id}) {
             movies[indexObj] = movieObj
         }
-        view?.reloadData()
+        viewController?.reloadData()
     }
     
     func numberOfRowsInSection() -> Int {
@@ -65,7 +63,7 @@ final class MovieListPresenter : MovieListPresenterProtocol {
     }
     
     func showActionSheet() {
-        (view as? MovieListViewController)?.presentAlertWithTitleAndMessage(options: "Title", "Release Date", "Cancel", completion: { indexObj in
+        (viewController as? MovieListViewController)?.presentAlertWithTitleAndMessage(options: "Title", "Release Date", "Cancel", completion: { indexObj in
             if indexObj == 0 || indexObj == 1 {
                 self.interactor.sortMoviesList(sortType: SortType.init(rawValue: indexObj) ?? .title, movies: self.movies)
             }
@@ -79,7 +77,7 @@ extension MovieListPresenter : MovieListInteractorOutputProtocol {
             return
         }
         self.movies = sortedMovies
-        view?.reloadData()
+        viewController?.reloadData()
     }
     
     func handleMoviesListResponse(result: MovieListResult) {
@@ -87,7 +85,7 @@ extension MovieListPresenter : MovieListInteractorOutputProtocol {
         case .success(let movieResponse) :
             if let movies = movieResponse.movieList {
                 self.movies = movies
-                view?.reloadData()
+                viewController?.reloadData()
             }
         case .failure(let error):
             print(error)

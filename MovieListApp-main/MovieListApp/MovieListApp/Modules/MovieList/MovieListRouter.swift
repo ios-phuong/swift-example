@@ -20,13 +20,13 @@ class MovieListRouter {
     
     weak var viewController: MovieListViewController?
     
-    static func createModule(movieListVCRef: MovieListViewController){
+    static func createModule(movieListVC: MovieListViewController) {
         let interactor = ListInteractor()
         let router = MovieListRouter()
-        let presenter = MovieListPresenter(view: movieListVCRef, router: router, interactor: interactor)
-        movieListVCRef.presenter = presenter
+        let presenter = MovieListPresenter(viewController: movieListVC, router: router, interactor: interactor)
+        movieListVC.presenter = presenter
         interactor.presenter = presenter
-        router.viewController = movieListVCRef
+        router.viewController = movieListVC
     }
 }
 

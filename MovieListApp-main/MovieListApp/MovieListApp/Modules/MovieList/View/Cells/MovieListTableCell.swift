@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MovieListTableCell: UITableViewCell {
+class MovieListTableCell: UITableViewCell {
     
     @IBOutlet private weak var movieImage: SwiftShadowImageView!
     @IBOutlet private weak var titleLabel: UILabel!

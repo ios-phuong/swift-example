@@ -31,8 +31,6 @@ extension ListInteractor: MovieListInteractorProtocol {
         case .title :
             self.presenter?.handleSortedMoviesList(result: (movies.sorted(\.title)))
         case .releaseDate :
-            print((movies.sorted(\.releaseDateObj!)))
-            print(movies.map{$0.releaseDateObj})
             self.presenter?.handleSortedMoviesList(result: (movies.sorted(\.releaseDateObj!)))
         }
     }

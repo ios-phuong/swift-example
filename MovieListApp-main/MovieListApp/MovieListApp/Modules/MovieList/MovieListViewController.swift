@@ -22,7 +22,8 @@ final class MovieListViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode =  .always
-        MovieListRouter.createModule(movieListVCRef: self)
+        
+        MovieListRouter.createModule(movieListVC: self)
         presenter.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveReloadNotification(notification:)), name:  Notification.Name("RELOAD_NOTIFICATION"), object: nil)
     }
