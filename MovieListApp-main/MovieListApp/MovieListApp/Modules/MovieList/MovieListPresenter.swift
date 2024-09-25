@@ -74,7 +74,7 @@ final class MovieListPresenter : MovieListPresenterProtocol {
         })
     }
 }
-//MARK: - Extension +  MovieListInteractorOutputProtocol
+
 extension MovieListPresenter : MovieListInteractorOutputProtocol {
     func handleSortedMoviesList(result: [MovieList]?) {
         guard let sortedMovies = result else {

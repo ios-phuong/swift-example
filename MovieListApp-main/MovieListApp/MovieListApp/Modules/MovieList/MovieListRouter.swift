@@ -16,10 +16,8 @@ enum MovieListRoutes {
     case detail(movie: MovieList)
 }
 
-
-final class MovieListRouter {
+class MovieListRouter {
     
-    //MARK: - Properties
     weak var viewController: MovieListViewController?
     
     static func createModule(movieListVCRef: MovieListViewController){
@@ -27,18 +25,16 @@ final class MovieListRouter {
         let router = MovieListRouter()
         let presenter = MovieListPresenter(view: movieListVCRef, router: router, interactor: interactor)
         movieListVCRef.presenter = presenter
-        interactor.output = presenter
+        interactor.presenter = presenter
         router.viewController = movieListVCRef
     }
 }
 
-//MARK: - Extension +  MovieListRouterProtocol
 extension MovieListRouter : MovieListRouterProtocol {
     func navigate(_ route: MovieListRoutes) {
         switch route {
         case .detail(let movieObj):
             let detailVC = MovieDetailsViewRouter.createModule(movie: movieObj)
-            
             viewController?.navigationController?.pushViewController(detailVC, animated: true)
         }
     }

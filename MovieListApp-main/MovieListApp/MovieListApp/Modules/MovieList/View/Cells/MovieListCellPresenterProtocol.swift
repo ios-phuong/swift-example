@@ -13,7 +13,6 @@ protocol MovieListCellPresenterProtocol: AnyObject {
 }
 
 final class MovieListCellPresenter {
-    //MARK: - Properties
     weak var view: MovieListCellProtocol?
     private let movie: MovieList
     
@@ -23,7 +22,6 @@ final class MovieListCellPresenter {
     }
 }
 
-//MARK: - Extension + MovieListCellPresenterProtocol
 extension MovieListCellPresenter : MovieListCellPresenterProtocol {
     func load() {
         view?.setTitleLabel(movie.title)

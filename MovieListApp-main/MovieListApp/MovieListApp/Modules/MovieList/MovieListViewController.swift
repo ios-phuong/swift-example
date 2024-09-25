@@ -14,22 +14,17 @@ protocol MovieListViewControllerProtocol: AnyObject {
 
 final class MovieListViewController: UIViewController {
     
-    //MARK: - Properties
-    var presenter: MovieListPresenterProtocol!
     @IBOutlet private weak var tableView: UITableView!
+    
+    var presenter: MovieListPresenterProtocol!
 
-    //MARK: - Lifecylce
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode =  .always
         MovieListRouter.createModule(movieListVCRef: self)
         presenter.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveReloadNotification(notification:)), name:  Notification.Name("RELOAD_NOTIFICATION"), object: nil)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode =  .always
     }
     
     @objc func didReceiveReloadNotification(notification: NSNotification) {
@@ -43,7 +38,6 @@ final class MovieListViewController: UIViewController {
     }
 }
 
-//MARK: - Extension +  MovieListViewControllerProtocol
 extension MovieListViewController : MovieListViewControllerProtocol {
     func reloadData() {
         tableView.reloadSections(IndexSet.init(arrayLiteral: 0), with: .fade)
@@ -56,7 +50,6 @@ extension MovieListViewController : MovieListViewControllerProtocol {
     }
 }
 
-// MARK: - TabeView (List)
 extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         presenter.numberOfRowsInSection()
