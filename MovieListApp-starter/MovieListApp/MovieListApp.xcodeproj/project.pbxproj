@@ -209,8 +209,8 @@
 				005812052915264F00E19849 /* Entity */,
 				005811E52915035000E19849 /* View */,
 				005811E32915030C00E19849 /* MovieListViewController.swift */,
-				005811DD291502D900E19849 /* MovieListPresenter.swift */,
 				005811E1291502F300E19849 /* MovieListInteractor.swift */,
+				005811DD291502D900E19849 /* MovieListPresenter.swift */,
 				005811DF291502E400E19849 /* MovieListRouter.swift */,
 			);
 			path = MovieList;
@@ -220,10 +220,10 @@
 			isa = PBXGroup;
 			children = (
 				00CA86ED291A2F9400768BA0 /* View */,
+				005811F32915057C00E19849 /* MovieDetailsViewController.swift */,
+				005811F12915055500E19849 /* MovieDetailsInteractor.swift */,
 				005811ED2915053C00E19849 /* MovieDetailsPresenter.swift */,
 				005811EF2915054800E19849 /* MovieDetailsRouter.swift */,
-				005811F12915055500E19849 /* MovieDetailsInteractor.swift */,
-				005811F32915057C00E19849 /* MovieDetailsViewController.swift */,
 			);
 			path = MovieDetails;
 			sourceTree = "<group>";
