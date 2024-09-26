@@ -7,6 +7,13 @@
 
 import UIKit
 
+protocol MovieListCellProtocol: AnyObject {
+    func setMovieImage(_ image : UIImage)
+    func setWatchListButton(_ isWatchListAdded: Bool)
+    func setDurationNGenreLabel(_ text: String)
+    func setTitleLabel(_ text: String)
+}
+
 class MovieListTableCell: UITableViewCell {
     
     @IBOutlet private weak var movieImage: SwiftShadowImageView!
@@ -14,17 +21,14 @@ class MovieListTableCell: UITableViewCell {
     @IBOutlet private weak var timeNGenreLabel: UILabel!
     @IBOutlet private weak var onMyWatchList: UILabel!
 
-    func configureCell(movie: Movie) {
-        setTitleLabel(movie.title)
-        if let movieImage = UIImage(named: "\(movie.id)") {
-            setMovieImage(movieImage)
+    var cellPresenter: MovieListCellPresenterProtocol! {
+        didSet {
+            cellPresenter.load()
         }
-        setDurationNGenreLabel("\(movie.duration) -  \(movie.genre)")
-        setWatchListButton(movie.watchListAdded ?? false)
     }
 }
 
-extension MovieListTableCell {
+extension MovieListTableCell: MovieListCellProtocol {
     func setTitleLabel(_ text: String) {
         titleLabel.text = text
         titleLabel.layoutIfNeeded()

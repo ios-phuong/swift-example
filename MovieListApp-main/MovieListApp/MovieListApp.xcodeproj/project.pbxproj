@@ -35,6 +35,7 @@
 		00CA86F1291A301F00768BA0 /* MovieDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CA86F0291A301F00768BA0 /* MovieDetailsHeaderView.swift */; };
 		00CA86F3291A37F000768BA0 /* MovieDetailsHeaderPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CA86F2291A37F000768BA0 /* MovieDetailsHeaderPresenterProtocol.swift */; };
 		00CA86F6291A64FD00768BA0 /* SwiftShadowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CA86F5291A64FD00768BA0 /* SwiftShadowImageView.swift */; };
+		819790322CA504A400A8A43D /* MovieListCellPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819790312CA504A400A8A43D /* MovieListCellPresenterProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		00CA86F0291A301F00768BA0 /* MovieDetailsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsHeaderView.swift; sourceTree = "<group>"; };
 		00CA86F2291A37F000768BA0 /* MovieDetailsHeaderPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsHeaderPresenterProtocol.swift; sourceTree = "<group>"; };
 		00CA86F5291A64FD00768BA0 /* SwiftShadowImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftShadowImageView.swift; sourceTree = "<group>"; };
+		819790312CA504A400A8A43D /* MovieListCellPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCellPresenterProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +243,7 @@
 			children = (
 				005811E9291503EF00E19849 /* MovieListTableCell.swift */,
 				005811EA291503EF00E19849 /* MovieListTableCell.xib */,
+				819790312CA504A400A8A43D /* MovieListCellPresenterProtocol.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				005811F42915057C00E19849 /* MovieDetailsViewController.swift in Sources */,
 				005811E42915030C00E19849 /* MovieListViewController.swift in Sources */,
 				005C57A12916601500979410 /* Extensions.swift in Sources */,
+				819790322CA504A400A8A43D /* MovieListCellPresenterProtocol.swift in Sources */,
 				005C579E29165B5C00979410 /* JSONManager.swift in Sources */,
 				00581207291527A200E19849 /* MovieListResponse.swift in Sources */,
 				005811EE2915053C00E19849 /* MovieDetailsPresenter.swift in Sources */,

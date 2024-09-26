@@ -60,7 +60,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(with: MovieListTableCell.self, for: indexPath)
         cell.selectionStyle = .none
         if let movie = presenter.movie(indexPath.row) {
-            cell.configureCell(movie: movie)
+            cell.cellPresenter = MovieListCellPresenter(view: cell, movie: movie)
         }
         return cell
     }
